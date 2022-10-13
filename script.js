@@ -24,6 +24,8 @@ const State = {
   PAUSE: 0
 };
 
+const TIMER_INTERVAL = 15000; // 15000 ms = 15s
+
 let appState = null;
 
 // const flag = {
@@ -165,7 +167,7 @@ play.addEventListener('click', ()=> {
     setWordText(words[_currentWordIndex]);
     setCurrentWordCounter(_currentWordIndex+1);
     buzzer.play();
-  }, 1000);
+  }, TIMER_INTERVAL);
 });
 
 function setState(state) {
