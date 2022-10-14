@@ -207,6 +207,13 @@ play.addEventListener('click', ()=> {
     _currentWordIndex += 1;
     setWordText(words[_currentWordIndex]);
     setCurrentWordCounter(_currentWordIndex+1);
+
+    if(_currentWordIndex === words.length - 1) {
+    // Div_container.style.backgroundColor = 'Red';
+    Div_container.style.backgroundColor = endRedColor;
+  } else {
+    Div_container.style.backgroundColor = 'White';
+  }
     buzzer.play();
   }, TIMER_INTERVAL);
 });
