@@ -4,7 +4,7 @@
   <meta charset="UTF-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Document</title>
+  <title>WAT(Word Association Test)</title>
   <style>
     html, body {
       height: 100vh;
@@ -21,7 +21,7 @@
 </head>
 <body>
   <div id="container" class="w-full h-full" style="position: relative;">
-    <div class="flex justify-start items-center" style="height: 3rem;">
+    <div class="flex justify-start items-center bg-gray-50 shadow-sm" style="height: 3rem;">
       <button id="play" class="m-2 mr-0 bg-white border border-gray-400 hover:bg-gray-100 rounded-sm px-2 py-1">play</button>
       <button id="pause" class="m-2 mr-0 bg-white border border-gray-400 hover:bg-gray-100 rounded-sm px-2 py-1">pause</button>
       <button id="reset" class="m-2 bg-white border border-gray-400 w-15 hover:bg-gray-100 rounded-sm px-2 py-1">Reset</button>
@@ -31,7 +31,7 @@
       </div>
       <p id="error" class="ml-4 border border-red-400 text-red-400 rounded-sm p-1 text-sm" style="display: none;">Error: Word out of range</p>
     </div>
-    <div class="flex justify-center items-center flex-col" style="height: calc(100vh - 6rem);">
+    <div id="wordContainer" class="flex justify-center items-center flex-col" style="height: calc(100vh - 6rem);">
       <p id="word" class="text-8xl font-medium"></p>
     </div>
     <div style="height: 3rem;" class="flex flex-row justify-center">

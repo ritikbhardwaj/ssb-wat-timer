@@ -1,6 +1,9 @@
 const buzzer = document.getElementById('buzzer');
 const Img_fullScreen = document.getElementById('full_screen');
 
+/* Div container */
+const Div_container = document.getElementById('container');
+
 /* Word */
 const _Text_WAT_Word = document.getElementById('word');
 
@@ -18,6 +21,8 @@ const Button_reset = document.getElementById('reset');
 
 const Button_prev = document.getElementById('prev');
 const Button_next = document.getElementById('next');
+
+const endRedColor = 'rgb(252, 165, 165)';
 
 const State = {
   PLAY: 1,
@@ -42,7 +47,23 @@ const buttonValid = {
 const introWord = 'Word Association Test';
 const outroWord = 'Test has ended.'
 
-const actualWords = ['India', 'Murder', 'Adventure', 'Penalty', 'Love', 'Yoga', 'Cooperation', 'Loafer', 'Destiny', 'Death'];
+const actualWords = [
+  'choice',
+  'champion',
+  'deterioriate',
+  'cure',
+  'disease',
+  'demand',
+  'crowd',
+  'earn',
+  'fearful',
+  'oppose',
+  'fire',
+  'rude',
+  'tease',
+  'console',
+  'vulgar'
+];
 
 const words = [
   introWord, ...actualWords, outroWord
@@ -92,6 +113,13 @@ function setCurrentWordCounter(value) {
 
 Input_currentWordCounter.addEventListener('change', Input_currentWordCounterChange);
 function Input_currentWordCounterChange(event) {
+
+  if(Input_currentWordCounter.value == words.length) {
+    Div_container.style.backgroundColor = endRedColor;
+  } else {
+    Div_container.style.backgroundColor = 'white';
+  }
+
   if(Input_currentWordCounter.value <= 0) {
     setCurrentWordCounter(1);
     _currentWordIndex = 0;
@@ -106,7 +134,7 @@ function Input_currentWordCounterChange(event) {
     return;
   }
 
-  _currentWordIndex = Input_currentWordCounter.value;
+  _currentWordIndex = Input_currentWordCounter.value - 1;
   setWordText(words[_currentWordIndex]);
 }
 
@@ -114,7 +142,6 @@ function Input_currentWordCounterChange(event) {
 Button_prev.addEventListener('click', ()=> {
 
   if(_currentWordIndex === 0) {
-    prev
     return;
   }
 
@@ -124,6 +151,13 @@ Button_prev.addEventListener('click', ()=> {
   _currentWordIndex -= 1;
   setWordText(words[_currentWordIndex]);
   setCurrentWordCounter(_currentWordIndex + 1);
+
+  if(_currentWordIndex === words.length - 1) {
+    // Div_container.style.backgroundColor = 'Red';
+    Div_container.style.backgroundColor = endRedColor;
+  } else {
+    Div_container.style.backgroundColor = 'White';
+  }
 });
 
 Button_next.addEventListener('click', ()=> {
@@ -136,8 +170,13 @@ Button_next.addEventListener('click', ()=> {
   setState('pause');
 
   _currentWordIndex += 1;
+
   setWordText(words[_currentWordIndex]);
   setCurrentWordCounter((_currentWordIndex + 1));
+
+  if(_currentWordIndex === words.length - 1) {
+    Div_container.style.backgroundColor = endRedColor;
+  }
 });
 
 /** Pause play events */
@@ -151,7 +190,9 @@ play.addEventListener('click', ()=> {
   /** Else set state to play */
   setState('play');
 
-  interval = setInterval(() => {
+  let secInterval = null;
+  let currSecTime = 15;
+  interval = setInterval(async () => {
 
     if(_currentWordIndex === words.length-1) {
       clearInterval(interval);
@@ -198,6 +239,6 @@ reset.addEventListener('click', ()=> {
   clearInterval(interval);
   _currentWordIndex = 0;
   setState('pause');
-  setWordText('<WAT>');
+  setWordText(introWord);
   setCurrentWordCounter(_currentWordIndex+1);
 });
